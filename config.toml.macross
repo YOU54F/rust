@@ -1,0 +1,166 @@
+# Includes one of the default files in src/bootstrap/defaults
+profile = "compiler"
+change-id = 124501
+[rust]
+codegen-backends = ["llvm"]
+[target.x86_64-unknown-linux-musl]
+linker = "x86_64-linux-musl-gcc"
+default-linker = "x86_64-linux-musl-gcc"
+ar = "x86_64-linux-musl-ar"
+cc = "x86_64-linux-musl-gcc"
+cxx = "x86_64-linux-musl-g++"
+ranlib = "x86_64-linux-musl-ranlib"
+musl-root = "/opt/homebrew/Cellar/musl-cross-x86_64/0.9.9_2/libexec/x86_64-linux-musl"
+[target.x86_64-unknown-linux-gnu]
+linker = "x86_64-linux-gnu-gcc"
+ar = "x86_64-linux-gnu-ar"
+default-linker = "x86_64-linux-gnu-gcc"
+cc = "x86_64-linux-gnu-gcc"
+cxx = "x86_64-linux-gnu-g++"
+ranlib = "x86_64-linux-gnu-ranlib"
+[target.aarch64-unknown-linux-musl]
+default-linker = "aarch64-linux-musl-gcc"
+linker = "aarch64-linux-musl-gcc"
+ar = "aarch64-linux-musl-ar"
+ranlib = "aarch64-linux-musl-ranlib"
+cc = "aarch64-linux-musl-gcc"
+cxx = "aarch64-linux-musl-g++"
+musl-root = "/opt/homebrew/Cellar/musl-cross-aarch64/0.9.9_2/libexec/aarch64-linux-musl"
+[target.aarch64-unknown-linux-gnu]
+default-linker = "aarch64-linux-gnu-gcc"
+linker = "aarch64-linux-gnu-gcc"
+ar = "aarch64-linux-gnu-ar"
+ranlib = "aarch64-linux-gnu-ranlib"
+cc = "aarch64-linux-gnu-gcc"
+cxx = "aarch64-linux-gnu-g++"
+[target.arm-unknown-linux-musleabi]
+default-linker = "arm-linux-musleabi-gcc"
+linker = "arm-linux-musleabi-gcc"
+ar = "arm-linux-musleabi-ar"
+ranlib = "arm-linux-musleabi-ranlib"
+cc = "arm-linux-musleabi-gcc"
+cxx = "arm-linux-musleabi-g++"
+musl-root = "/opt/homebrew/Cellar/musl-cross-arm/0.9.9_2/libexec/arm-linux-musleabi"
+[target.arm-unknown-linux-gnueabi]
+default-linker = "arm-linux-gnueabi-gcc"
+linker = "arm-linux-gnueabi-gcc"
+ar = "arm-linux-gnueabi-ar"
+ranlib = "arm-linux-gnueabi-ranlib"
+cc = "arm-linux-gnueabi-gcc"
+cxx = "arm-linux-gnueabi-g++"
+[target.arm-unknown-linux-musleabihf]
+default-linker = "arm-linux-musleabihf-gcc"
+linker = "arm-linux-musleabihf-gcc"
+ar = "arm-linux-musleabihf-ar"
+ranlib = "arm-linux-musleabihf-ranlib"
+cc = "arm-linux-musleabihf-gcc"
+cxx = "arm-linux-musleabihf-g++"
+[target.arm-unknown-linux-gnueabihf]
+default-linker = "arm-linux-gnueabihf-gcc"
+linker = "arm-linux-gnueabihf-gcc"
+ar = "arm-linux-gnueabihf-ar"
+ranlib = "arm-linux-gnueabihf-ranlib"
+cc = "arm-linux-gnueabihf-gcc"
+cxx = "arm-linux-gnueabihf-g++"
+
+# [target.i386-unknown-linux-musl]
+# linker = "i386-linux-musl-gcc"
+# ar = "i386-linux-musl-ar"
+# [target.i486-unknown-linux-musl]
+# linker = "i486-linux-musl-gcc"
+# ar = "i486-linux-musl-ar"
+
+[target.i586-unknown-linux-musl]
+default-linker = "i586-linux-musl-gcc"
+linker = "i586-linux-musl-gcc"
+ar = "i586-linux-musl-ar"
+ranlib = "i586-linux-musl-ranlib"
+cc = "i586-linux-musl-gcc"
+cxx = "i586-linux-musl-g++"
+musl-root = "/opt/homebrew/Cellar/musl-cross-i586/0.9.9_2/libexec/i586-linux-musl"
+[target.i686-unknown-linux-musl]
+default-linker = "i686-linux-musl-gcc"
+linker = "i686-linux-musl-gcc"
+ar = "i686-linux-musl-ar"
+ranlib = "i686-linux-musl-ranlib"
+cc = "i686-linux-musl-gcc"
+cxx = "i686-linux-musl-g++"
+musl-root = "/opt/homebrew/Cellar/musl-cross-i686/0.9.9_2/libexec/i686-linux-musl"
+[target.i686-unknown-linux-gnu]
+default-linker = "i686-linux-gnu-gcc"
+linker = "i686-linux-gnu-gcc"
+ar = "i686-linux-gnu-ar"
+ranlib = "i686-linux-gnu-ranlib"
+cc = "i686-linux-gnu-gcc"
+cxx = "i686-linux-gnu-g++"
+
+# linker = "powerpc-sf-linux-musl-gcc"
+# ar = "powerpc-sf-linux-musl-ar"
+# [target.powerpc-unknown-linux-musl]
+# linker = "powerpc-linux-musl-gcc"
+# ar = "powerpc-linux-musl-ar"
+# [target.powerpc64-unknown-linux-musl]
+# linker = "powerpc64-linux-musl-gcc"
+# ar = "powerpc64-linux-musl-ar"
+
+[target.powerpc64le-unknown-linux-musl]
+default-linker = "powerpc64le-linux-musl-gcc"
+linker = "powerpc64le-linux-musl-gcc"
+ar = "powerpc64le-linux-musl-ar"
+ranlib = "powerpc64le-linux-musl-ranlib"
+cc = "powerpc64le-linux-musl-gcc"
+cxx = "powerpc64le-linux-musl-g++"
+musl-root = "/opt/homebrew/Cellar/musl-cross-powerpc64le/0.9.9_2/libexec/powerpc64le-linux-musl"
+# [target.powerpc-sf-unknown-linux-mu
+[target.s390x-unknown-linux-musl]
+default-linker = "s390x-linux-musl-gcc"
+linker = "s390x-linux-musl-gcc"
+ar = "s390x-linux-musl-ar"
+cc = "s390x-linux-musl-gcc"
+cxx = "s390x-linux-musl-g++"
+ranlib = "s390x-linux-musl-ranlib"
+musl-root = "/opt/homebrew/Cellar/musl-cross-s390x/0.9.9_2/libexec/s390x-linux-musl"
+[target.riscv64gc-unknown-linux-musl]
+default-linker = "riscv64gc-linux-musl-gcc"
+linker = "riscv64-linux-musl-gcc"
+ar = "riscv64-linux-musl-ar"
+ranlib = "riscv64-linux-musl-ranlib"
+cc = "riscv64-linux-musl-gcc"
+cxx = "riscv64-linux-musl-g++"
+musl-root = "/opt/homebrew/Cellar/musl-cross-riscv64/0.9.9_2/libexec/riscv64-linux-musl"
+[target.aarch64-unknown-freebsd]
+linker = "/tmp/loki/bin/aarch64-unknown-freebsd12.3-gcc"
+cc = "/tmp/loki/bin/aarch64-unknown-freebsd12.3-gcc"
+cxx = "/tmp/loki/bin/aarch64-unknown-freebsd12.3-g++"
+ar = "/tmp/loki/aarch64-unknown-freebsd12.3/bin/ar"
+ranlib = "/tmp/loki/aarch64-unknown-freebsd12.3/bin/ranlib"
+[target.x86_64-unknown-freebsd]
+linker = "/tmp/loki/bin/x86_64-unknown-freebsd12.3-gcc"
+ar = "/tmp/loki/bin/x86_64-unknown-freebsd12.3-ar"
+cc = "/tmp/loki/bin/x86_64-unknown-freebsd12.3-gcc"
+cxx = "/tmp/loki/bin/x86_64-unknown-freebsd12.3-g++"
+ranlib = "/tmp/loki/bin/x86_64-unknown-freebsd12.3-ranlib"
+[target.x86_64-unknown-openbsd]
+linker = "/tmp/atar/bin/x86_64-unknown-openbsd-gcc"
+ar = "/tmp/atar/bin/x86_64-unknown-openbsd-ar"
+cc = "/tmp/atar/bin/x86_64-unknown-openbsd-gcc"
+cxx = "/tmp/atar/bin/x86_64-unknown-openbsd-g++"
+ranlib = "/tmp/atar/bin/x86_64-unknown-openbsd-ranlib"
+[target.aarch64-unknown-openbsd]
+linker = "/tmp/atar/bin/aarch64-unknown-openbsd-gcc"
+ar = "/tmp/atar/bin/aarch64-unknown-openbsd-ar"
+cc = "/tmp/atar/bin/aarch64-unknown-openbsd-gcc"
+cxx = "/tmp/atar/bin/aarch64-unknown-openbsd-g++"
+ranlib = "/tmp/atar/bin/aarch64-unknown-openbsd-ranlib"
+[target.x86_64-unknown-netbsd]
+linker = "/tmp/dakini/bin/x86_64-unknown-netbsd-gcc"
+ar = "/tmp/dakini/bin/x86_64-unknown-netbsd-ar"
+cc = "/tmp/dakini/bin/x86_64-unknown-netbsd-gcc"
+cxx = "/tmp/dakini/bin/x86_64-unknown-netbsd-g++"
+ranlib = "/tmp/dakini/bin/x86_64-unknown-netbsd-ranlib"
+[target.aarch64-unknown-netbsd]
+linker = "/tmp/dakini/bin/aarch64-unknown-netbsd-gcc"
+cc = "/tmp/dakini/bin/aarch64-unknown-netbsd-gcc"
+cxx = "/tmp/dakini/bin/aarch64-unknown-netbsd-g++"
+ar = "/tmp/dakini/bin/aarch64-unknown-netbsd-ar"
+ranlib = "/tmp/dakini/bin/aarch64-unknown-netbsd-ranlib"

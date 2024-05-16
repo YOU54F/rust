@@ -1,0 +1,166 @@
+name: cross compile toolchain
+on:
+  push:
+    branches:
+      - macos
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+    build:
+      name: ${{ matrix.target }}
+      runs-on: macos-14
+      strategy:
+        fail-fast: false
+        matrix:
+          target: [
+            "x86_64-unknown-linux-gnu", 
+            "x86_64-unknown-linux-musl", 
+            "aarch64-unknown-linux-gnu",
+            "aarch64-unknown-linux-musl",
+            "arm-unknown-linux-gnueabihf",
+            "arm-unknown-linux-gnueabi",
+            "arm-unknown-linux-musleabihf",
+            "arm-unknown-linux-musleabi",
+            "i686-unknown-linux-musl",
+            "i586-unknown-linux-musl",
+            "i686-unknown-linux-gnu",
+            "s390x-unknown-linux-musl",
+            "riscv64gc-unknown-linux-musl",
+            "powerpc64le-unknown-linux-musl",
+            # "x86_64-unknown-freebsd",
+            # "x86_64-unknown-openbsd",
+            # "x86_64-unknown-netbsd",
+            # "aarch64-unknown-freebsd",
+            # "aarch64-unknown-openbsd",
+            # "aarch64-unknown-netbsd",
+            ]
+      steps:
+
+      - name: checkout the source code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Install musl-cross tools
+        if: contains(matrix.target, 'musl')
+        run: |
+          brew tap you54f/homebrew-musl-cross-multilib
+          case ${{ matrix.target }} in
+            aarch64-unknown-linux-musl)
+              FILE=musl-cross-aarch64--0.9.9_2.arm64_sonoma.bottle.tar.gz
+              BREW_MUSL_CROSS=musl-cross-aarch64
+              ;;
+            x86_64-unknown-linux-musl)
+              FILE=musl-cross-x86_64--0.9.9_2.arm64_sonoma.bottle.tar.gz
+              BREW_MUSL_CROSS=musl-cross-x86_64
+              ;;
+            arm-unknown-linux-musleabi)
+              FILE=musl-cross-arm--0.9.9_2.arm64_sonoma.bottle.tar.gz
+              BREW_MUSL_CROSS=musl-cross-arm
+              ;;
+            arm-unknown-linux-musleabihf)
+              FILE=musl-cross-arm-hf--0.9.9_2.arm64_sonoma.bottle.tar.gz
+              BREW_MUSL_CROSS=musl-cross-arm-hf
+              ;;
+            i686-unknown-linux-musl)
+              FILE=musl-cross-i686--0.9.9_2.arm64_sonoma.bottle.tar.gz
+              BREW_MUSL_CROSS=musl-cross-i686
+              ;;
+            i586-unknown-linux-musl)
+              FILE=musl-cross-i586--0.9.9_2.arm64_sonoma.bottle.tar.gz
+              BREW_MUSL_CROSS=musl-cross-i586
+              ;;
+            s390x-unknown-linux-musl)
+              FILE=musl-cross-s390x--0.9.9_2.arm64_sonoma.bottle.tar.gz
+              BREW_MUSL_CROSS=musl-cross-s390x
+              ;;
+            riscv64gc-unknown-linux-musl)
+              FILE=musl-cross-riscv64--0.9.9_2.arm64_sonoma.bottle.tar.gz
+              BREW_MUSL_CROSS=musl-cross-riscv64
+              ;;
+            powerpc64le-unknown-linux-musl)
+              FILE=musl-cross-powerpc64le--0.9.9_2.arm64_sonoma.bottle.tar.gz
+              BREW_MUSL_CROSS=musl-cross-powerpc64le
+              ;;
+            *)
+              echo "Unknown target: ${{ matrix.target }}"
+              exit 1
+              ;;
+          esac
+          curl -LO https://github.com/YOU54F/homebrew-musl-cross-multilib/releases/download/musl-cross-0.9.9/$FILE
+          brew install $FILE
+          ls $(brew --prefix $BREW_MUSL_CROSS)/*
+      - name: Install libunwind-musl
+        if: contains(matrix.target, 'musl')
+        run: |
+          brew tap you54f/libunwind-musl
+          case ${{ matrix.target }} in
+            aarch64-unknown-linux-musl)
+              FILE=libunwind-aarch64-musl--1.8.1.arm64_sonoma.bottle.tar.gz
+              BREW_LIBUNWIND=libunwind-aarch64-musl
+              ;;
+            x86_64-unknown-linux-musl)
+              FILE=libunwind-x86_64-musl--1.8.1.arm64_sonoma.bottle.tar.gz
+              BREW_LIBUNWIND=libunwind-x86_64-musl
+              ;;
+            arm-unknown-linux-musleabihf)
+              FILE=libunwind-arm-hf-musl--1.8.1.arm64_sonoma.bottle.tar.gz
+              BREW_LIBUNWIND=libunwind-arm-hf-musl
+              ;;
+            i686-unknown-linux-musl)
+              FILE=libunwind-i686-musl--1.8.1.arm64_sonoma.bottle.tar.gz
+              BREW_LIBUNWIND=libunwind-i686-musl
+              ;;
+            i586-unknown-linux-musl)
+              FILE=libunwind-i586-musl--1.8.1.arm64_sonoma.bottle.tar.gz
+              BREW_LIBUNWIND=libunwind-i586-musl
+              ;;
+            s390x-unknown-linux-musl)
+              FILE=libunwind-s390x-musl--1.8.1.arm64_sonoma.bottle.tar.gz
+              BREW_LIBUNWIND=libunwind-s390x-musl
+              ;;
+            riscv64gc-unknown-linux-musl)
+              FILE=libunwind-riscv64-musl--1.8.1.arm64_sonoma.bottle.tar.gz
+              BREW_LIBUNWIND=libunwind-riscv64-musl
+              ;;
+            powerpc64le-unknown-linux-musl)
+              FILE=libunwind-powerpc64le-musl--1.8.1.arm64_sonoma.bottle.tar.gz
+              BREW_LIBUNWIND=libunwind-powerpc64le-musl
+              ;;
+            *)
+              echo "Unknown target: ${{ matrix.target }}"
+              exit 1
+              ;;
+          esac
+          curl -LO https://github.com/YOU54F/homebrew-libunwind-musl/releases/download/libunwind-1.8.1/$FILE
+          brew install $FILE
+          ls $(brew --prefix $BREW_LIBUNWIND)/*
+      - name: install gnu cross toolchains
+        run: |
+          case ${{ matrix.target }} in
+            x86_64-unknown-linux-gnu)
+              brew install messense/macos-cross-toolchains/x86_64-unknown-linux-gnu
+              ;;
+            aarch64-unknown-linux-gnu)
+              brew install messense/macos-cross-toolchains/aarch64-unknown-linux-gnu
+              ;;
+            arm-unknown-linux-gnueabi)
+              brew install messense/macos-cross-toolchains/arm-unknown-linux-gnueabi
+              ;;
+            arm-unknown-linux-gnueabihf)
+              brew install messense/macos-cross-toolchains/arm-unknown-linux-gnueabihf
+              ;;
+            i686-unknown-linux-gnu)
+              brew install messense/macos-cross-toolchains/i686-unknown-linux-gnu
+              ;;
+            *)
+              echo "Unknown target: ${{ matrix.target }}"
+              ;;
+          esac
+      - name: setup config for macross
+        run: |
+          mv config.toml.macross config.toml
+      - name: cross build toolchain for ${{ matrix.target }}
+        run: |
+          ./x build --target aarch64-apple-darwin,${{ matrix.target }} --stage 3
